@@ -1,0 +1,746 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matteo Mazzù - Musician</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;500&family=Lato:wght@300;400&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --bg-primary: #faf8f5;
+            --bg-secondary: #f0ede8;
+            --text-primary: #1a5c38;
+            --text-secondary: #2d7a4d;
+            --accent: #3ba863;
+            --accent-light: #4ec77a;
+            --border: #e0ddd8;
+        }
+
+        body {
+            font-family: 'Lato', sans-serif;
+            background: var(--bg-primary);
+            color: var(--text-primary);
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            background: rgba(250, 248, 245, 0.95);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            padding: 1.5rem 3rem;
+            border-bottom: 1px solid var(--border);
+            animation: slideDown 0.6s ease;
+        }
+
+        @keyframes slideDown {
+            from {
+                transform: translateY(-100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateY(0);
+                opacity: 1;
+            }
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.5rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            color: var(--text-primary);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .logo:hover {
+            color: var(--accent);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-primary);
+            text-decoration: none;
+            font-size: 0.95rem;
+            font-weight: 400;
+            letter-spacing: 0.5px;
+            position: relative;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -4px;
+            left: 0;
+            width: 0;
+            height: 1px;
+            background: var(--accent);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: var(--accent);
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        /* Hero Section */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: flex-start;
+            position: relative;
+            background: var(--bg-primary);
+            overflow: hidden;
+            padding: 8rem 3rem 4rem;
+        }
+
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: radial-gradient(circle at 30% 40%, rgba(45, 90, 69, 0.03) 0%, transparent 60%);
+            animation: float 20s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(-20px, -20px); }
+        }
+
+        .hero-content {
+            text-align: left;
+            z-index: 1;
+            animation: fadeInUp 1s ease 0.3s both;
+            max-width: 1400px;
+            width: 100%;
+            display: grid;
+            grid-template-columns: 1fr auto;
+            gap: 4rem;
+            align-items: center;
+        }
+
+        .hero-text {
+            text-align: left;
+        }
+
+        .hero-image {
+            width: 400px;
+            height: auto;
+        }
+
+        .hero-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(59, 168, 99, 0.15);
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero h1 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3.5rem;
+            font-weight: 400;
+            letter-spacing: 2px;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .hero p {
+            font-size: 0.95rem;
+            color: var(--text-secondary);
+            letter-spacing: 1px;
+            font-weight: 300;
+        }
+
+        /* Section Styling */
+        section {
+            padding: 8rem 3rem;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        h2 {
+            font-family: 'Playfair Display', serif;
+            font-size: 3rem;
+            font-weight: 400;
+            margin-bottom: 3rem;
+            letter-spacing: 2px;
+            position: relative;
+            display: inline-block;
+            color: var(--text-primary);
+        }
+
+        h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 0;
+            width: 60px;
+            height: 2px;
+            background: var(--accent);
+        }
+
+        /* Media Section */
+        .media-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+
+        .media-item {
+            background: var(--bg-secondary);
+            padding: 2rem;
+            border-radius: 4px;
+            border: 1px solid var(--border);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .media-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 30px rgba(45, 90, 69, 0.1);
+            border-color: var(--accent);
+        }
+
+        .media-embed {
+            width: 100%;
+            height: 250px;
+            margin-bottom: 1.5rem;
+            border-radius: 4px;
+            overflow: hidden;
+            background: var(--bg-primary);
+        }
+
+        .media-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .media-title {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.4rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .media-description {
+            color: var(--text-secondary);
+            font-size: 0.95rem;
+        }
+
+        .media-link {
+            display: inline-block;
+            margin-top: 1rem;
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 0.9rem;
+            letter-spacing: 0.5px;
+            transition: color 0.3s ease;
+        }
+
+        .media-link:hover {
+            color: var(--accent-light);
+        }
+
+        /* Agenda Section */
+        #agenda {
+            background: var(--bg-secondary);
+            padding: 8rem 3rem;
+            margin: 0;
+            max-width: 100%;
+        }
+
+        .agenda-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .show-list {
+            list-style: none;
+            margin-top: 3rem;
+        }
+
+        .show-item {
+            display: grid;
+            grid-template-columns: 120px 1fr;
+            gap: 2rem;
+            padding: 2rem 0;
+            border-bottom: 1px solid var(--border);
+            transition: padding-left 0.3s ease;
+        }
+
+        .show-item:hover {
+            padding-left: 1rem;
+        }
+
+        .show-date {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            font-weight: 400;
+            color: var(--accent);
+        }
+
+        .show-details h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.3rem;
+            font-weight: 400;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .show-location {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+        }
+
+        .show-tickets {
+            display: flex;
+            align-items: center;
+        }
+
+        .ticket-btn {
+            padding: 0.8rem 2rem;
+            background: var(--accent);
+            color: white;
+            text-decoration: none;
+            border-radius: 3px;
+            font-size: 0.85rem;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            display: inline-block;
+        }
+
+        .ticket-btn:hover {
+            background: var(--accent-light);
+            transform: scale(1.05);
+        }
+
+        /* About Section */
+        .about-content {
+            max-width: 800px;
+            margin-top: 3rem;
+        }
+
+        .about-image {
+            width: 100%;
+            height: auto;
+        }
+
+        .about-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 4px;
+            box-shadow: 0 10px 40px rgba(45, 90, 69, 0.15);
+        }
+
+        .about-text h3 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.8rem;
+            font-weight: 400;
+            margin-bottom: 1.5rem;
+            color: var(--text-primary);
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            color: var(--text-secondary);
+            line-height: 1.8;
+        }
+
+        .contact-info {
+            margin-top: 2rem;
+            padding: 2rem;
+            background: var(--bg-secondary);
+            border-left: 3px solid var(--accent);
+        }
+
+        .contact-info h4 {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+            font-weight: 400;
+        }
+
+        .contact-info a {
+            color: var(--accent);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .contact-info a:hover {
+            color: var(--accent-light);
+        }
+
+        /* Footer */
+        footer {
+            background: var(--text-primary);
+            color: var(--bg-primary);
+            text-align: center;
+            padding: 3rem;
+        }
+
+        footer p {
+            font-size: 0.9rem;
+            letter-spacing: 1px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            nav {
+                padding: 1rem 1.5rem;
+            }
+
+            .nav-links {
+                gap: 1.5rem;
+            }
+
+            .hero {
+                padding: 6rem 1.5rem 4rem;
+            }
+
+            .hero-content {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .hero-image {
+                width: 100%;
+                max-width: 300px;
+            }
+
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            section {
+                padding: 4rem 1.5rem;
+            }
+
+            h2 {
+                font-size: 2.2rem;
+            }
+
+            .show-item {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .show-tickets {
+                justify-content: flex-start;
+            }
+
+            .media-grid {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Smooth Scroll */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="#" class="logo">Matteo Mazzù</a>
+            <ul class="nav-links">
+                <li><a href="#media">Media</a></li>
+                <li><a href="#agenda">Shows</a></li>
+                <li><a href="#about">About</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <div class="hero-text">
+                <h1>Matteo Mazzù</h1>
+                <p>Bassist · Composer · Producer</p>
+            </div>
+            <div class="hero-image">
+                <img src="IMG_7322.jpg" alt="Matteo Mazzù">
+            </div>
+        </div>
+    </section>
+
+    <!-- Media Section -->
+    <section id="media">
+        <h2>Media</h2>
+        <div class="media-grid">
+            <div class="media-item">
+                <div class="media-embed">
+                    <iframe 
+                        src="https://www.youtube.com/embed/videoseries?list=PLiOgw_KT_yfd5-Oy50_ij87jta2SaMUQ6" 
+                        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <h3 class="media-title">Matteo Mazzù on bass</h3>
+                <a href="https://youtube.com/playlist?list=PLiOgw_KT_yfd5-Oy50_ij87jta2SaMUQ6&si=bT4WnhlQnQ02ZzJI" target="_blank" class="media-link">View on YouTube →</a>
+            </div>
+            <div class="media-item">
+                <div class="media-embed">
+                    <iframe 
+                        src="https://embed.tidal.com/playlists/75a351fe-fb48-4f2f-ad63-07d35076caf8?layout=gridify" 
+                        allowfullscreen>
+                    </iframe>
+                </div>
+                <h3 class="media-title">Matteo plays on this</h3>
+                <a href="https://tidal.com/playlist/75a351fe-fb48-4f2f-ad63-07d35076caf8" target="_blank" class="media-link">Listen on Tidal →</a>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Agenda Section -->
+    <section id="agenda">
+        <div class="agenda-container">
+            <h2>Upcoming Shows</h2>
+            <ul class="show-list">
+                <li class="show-item">
+                    <div class="show-date">JAN 2</div>
+                    <div class="show-details">
+                        <h3>Neon River</h3>
+                        <p class="show-location">Bimhuis, Amsterdam (NL)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">JAN 9</div>
+                    <div class="show-details">
+                        <h3>Jean-Paul Groove</h3>
+                        <p class="show-location">Brasserie de la Mule, Brussels (BE)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">JAN 10</div>
+                    <div class="show-details">
+                        <h3>WAAN</h3>
+                        <p class="show-location">DJS, Dordrecht (NL)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">JAN 13</div>
+                    <div class="show-details">
+                        <h3>Eloi Pascual Quartet</h3>
+                        <p class="show-location">Borriquita de Belem, Santiago (ES)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">JAN 15</div>
+                    <div class="show-details">
+                        <h3>Eloi Pascual Quartet</h3>
+                        <p class="show-location">Filoa, Coruña (ES)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">JAN 16</div>
+                    <div class="show-details">
+                        <h3>Eloi Pascual Quartet</h3>
+                        <p class="show-location">Meidinerz, Gijón (ES)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">JAN 17</div>
+                    <div class="show-details">
+                        <h3>Eloi Pascual Quartet</h3>
+                        <p class="show-location">Clavicembalo, Lugo (ES)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">JAN 20</div>
+                    <div class="show-details">
+                        <h3>Eloi Pascual Quartet</h3>
+                        <p class="show-location">Vitruvia, Vigo (ES)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">JAN 23</div>
+                    <div class="show-details">
+                        <h3>WAAN Album Release</h3>
+                        <p class="show-location">Paradiso, Amsterdam (NL)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">FEB 1</div>
+                    <div class="show-details">
+                        <h3>Lara Humbert's "I'm Not Done Cooking"</h3>
+                        <p class="show-location">Atelier 210, Brussels (BE)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">FEB 3</div>
+                    <div class="show-details">
+                        <h3>Dance Workshop w/ Célia Rorive & Guillaume Malempré</h3>
+                        <p class="show-location">Jazz Station, Brussels (BE)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">FEB 4</div>
+                    <div class="show-details">
+                        <h3>Dance Workshop w/ Célia Rorive & Guillaume Malempré</h3>
+                        <p class="show-location">Pianofabriek, Brussels (BE)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">FEB 6</div>
+                    <div class="show-details">
+                        <h3>Dean Medina</h3>
+                        <p class="show-location">Beerfabriek, Amsterdam (NL)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">FEB 12</div>
+                    <div class="show-details">
+                        <h3>Jean-Paul Groove - Le Zarico</h3>
+                        <p class="show-location">Saint-Hyacinthe (CA)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">FEB 13</div>
+                    <div class="show-details">
+                        <h3>Jean-Paul Groove - Bains Publics</h3>
+                        <p class="show-location">Rimouski (CA)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">FEB 15</div>
+                    <div class="show-details">
+                        <h3>Jean-Paul Groove - Phoque Off</h3>
+                        <p class="show-location">Québec (CA)</p>
+                    </div>
+                </li>
+                <li class="show-item">
+                    <div class="show-date">FEB 18</div>
+                    <div class="show-details">
+                        <h3>Jean-Paul Groove - Quai de Brumes</h3>
+                        <p class="show-location">Montréal (CA)</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about">
+        <h2>About</h2>
+        <div class="about-content">
+            <div class="about-text">
+                <h3>About</h3>
+                <p>
+                    Hi! My name is Matteo. I'm a bass player, composer and producer based in Amsterdam and Brussels.
+                </p>
+                <p>
+                    I take part in all kinds of creative projects across the world, from instrumental techno to indie rock, I love it all. Besides co-leading boundary-pushing group Neon River, I have recorded and performed with Oracle Sisters, Jean-Paul Groove, Jozef Dumoulin, Mark Schilders, Melissa Aldana, Deine Freunde, Chaerin Im, Antoine Pierre, PEET, Bart Wirtz, Guillaume Vierset, Jasper Blom…
+                </p>
+                <p>
+                    I'm available for touring, studio recordings (in person or remote), and teaching.
+                </p>
+                
+                <div class="contact-info">
+                    <h4>Contact & Bookings</h4>
+                    <p>Email: <a href="mailto:mazzum.music@gmail.com">mazzum.music@gmail.com</a></p>
+                    <div style="margin-top: 1.5rem; display: flex; gap: 1.5rem;">
+                        <a href="https://www.instagram.com/mazzum_bass/" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--accent); transition: color 0.3s ease;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z" fill="currentColor"/>
+                            </svg>
+                            Instagram
+                        </a>
+                        <a href="https://www.youtube.com/@matteomazzu8238" target="_blank" style="display: inline-flex; align-items: center; gap: 0.5rem; text-decoration: none; color: var(--accent); transition: color 0.3s ease;">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z" fill="currentColor"/>
+                            </svg>
+                            YouTube
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2026 Matteo Mazzù. All rights reserved.</p>
+    </footer>
+
+    <script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script>
+        // Smooth scroll with offset for fixed nav
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    const offsetTop = target.offsetTop - 80;
+                    window.scrollTo({
+                        top: offsetTop,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Add scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.is
